@@ -3,13 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Trader Candle Close</title>
+    <title>Apex Trader Candle Close Bot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: auto; }
+        .signal { padding: 10px; margin: 10px 0; }
+        .buy { color: green; }
+        .sell { color: red; }
+        .stop-loss { color: orange; }
+    </style>
 </head>
 <body>
-    <h1>Candle Close Data</h1>
-    <p>This page will display the latest candle close data.</p>
+    <div class="container">
+        <h1>Apex Trader Candle Close Bot</h1>
+        <div class="signal" id="signalResult"></div>
+        <button id="startTrading">Start Trading</button>
+    </div>
     <script>
-        // Add JavaScript code here to fetch and display candle close data
+        let isTrading = false;
+        let stopLoss = null;
+
+        function evaluateSignal(candleClose) {
+            if (candleClose > previousCandleClose) {
+                return 'buy';
+            } else {
+                return 'sell';
+            }
+        }
+
+        function manageTrades() {
+            // Logic for managing trades
+            // For example, trailing stop loss
+            if (isTrading && stopLoss) {
+                // Update stop loss logic here
+            }
+        }
+
+        document.getElementById('startTrading').addEventListener('click', function() {
+            isTrading = true;
+            // Simulating the candle close trading logic
+            setInterval(async () => {
+                const candleClose = await getCandleClose(); // Assume this function gets the latest candle close
+                const signal = evaluateSignal(candleClose);
+                document.getElementById('signalResult').textContent = `Signal: ${signal}`;
+                if (signal === 'buy') {
+                    // Execute buy trade
+                    stopLoss = candleClose - 10; // example stop loss
+                } else {
+                    // Execute sell trade
+                    stopLoss = candleClose + 10; // example stop loss
+                }
+                manageTrades();
+            }, 5 * 60 * 1000); // Every 5 minutes
+        });
+
+        async function getCandleClose() {
+            // Simulating an API call for the candle close
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(Math.random() * 100); // Example random candle close price
+                }, 1000);
+            });
+        }
     </script>
 </body>
 </html>
