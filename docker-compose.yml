@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  dashboard:
+    build: .
+    command: python server.py
+    ports:
+      - "8080:8080"
+      - "8765:8765"
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+
+  bot:
+    build: .
+    command: python bot/engine.py
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - dashboard

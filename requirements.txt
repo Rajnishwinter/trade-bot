@@ -1,0 +1,21 @@
+# AlgoTrader Pro — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Core
+pandas>=2.0.0
+numpy>=1.24.0
+python-dotenv>=1.0.0
+
+# Broker integrations
+MetaTrader5>=5.0.37       # Windows only (MT5 must be installed)
+ccxt>=4.2.0               # Crypto: Binance, Bybit, etc.
+
+# WebSocket & HTTP server
+websockets>=12.0
+aiohttp>=3.9.0
+
+# Telegram notifications
+python-telegram-bot>=20.0  # Optional
+
+# Backtesting (optional)
+backtesting>=0.3.3

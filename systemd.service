@@ -1,0 +1,17 @@
+[Unit]
+Description=AlgoTrader Pro Trading Bot
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/trading_bot
+EnvironmentFile=/home/ubuntu/trading_bot/.env
+ExecStart=/usr/bin/python3 bot/engine.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
